@@ -2,7 +2,24 @@
 
 This is the code for an assignment for the Secure Computing module in the Cybersecurity MSC in UCD.
 
-# Requirements
+## Usage
+
+The Spring Boot app was initialised using https://start.spring.io/
+
+To run the app use `./mvnw spring-boot:run`
+
+## Database
+
+Create promptVault database;
+
+```
+CREATE DATABASE promptVault;
+USE promptVault;
+CREATE USER 'website'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON promptVault.* TO 'website'@'localhost';
+```
+
+## Requirements
 
 Use Spring Boot
 
