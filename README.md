@@ -53,6 +53,10 @@ User - needs to register. Has username, email, role, account status.
 - Can see their flagged prompts
 - Can see their account status
 
+#### Add Users
+
+`curl -d '{"username":"example01","email":"example@example.com"}' -H 'Content-Type:application/json' http://localhost:8080/users`
+
 ### Categories
 
 Use to categorise flagged prompts.

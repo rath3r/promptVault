@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.promptVault.UserRepository;
-//import com.example.bookshop.exception.BookNotFoundException;
+import com.promptVault.exception.UserNotFoundException;
 import com.promptVault.model.User;
 
 import java.util.List;
@@ -22,19 +22,17 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    // Create a new Book
-    // @PostMapping("/books")
-    // public Book newBook(@Valid @RequestBody Book newBook) {
-    // return bookRepository.save(newBook);
-    // }
+    // Create a new user
+    @PostMapping("/users")
+    public User newUser(@Valid @RequestBody User newUser) {
+        return userRepository.save(newUser);
+    }
 
     // Get a Single Book
-    // @GetMapping("/books/{id}")
-    // public Book getBookById(@PathVariable(value = "id") Long bookId) throws
-    // BookNotFoundException {
-    // return bookRepository.findById(bookId).orElseThrow(() -> new
-    // BookNotFoundException(bookId));
-    // }
+    @GetMapping("/users/{id}")
+    public User getUserById(@PathVariable(value = "id") Long userId) throws UserNotFoundException {
+        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+    }
 
     // Update an Existing Book
     // @PutMapping("/books/{id}")
