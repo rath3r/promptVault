@@ -1,5 +1,7 @@
 package com.promptVault.model;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -19,8 +21,11 @@ public class User {
     @NotBlank
     private String email;
 
+    // not working
+    @ColumnDefault("false")
     private Boolean enabled;
 
+    // this should be a roleID with a separate model of roles defined eleswhere
     private String role;
 
     public User() {
