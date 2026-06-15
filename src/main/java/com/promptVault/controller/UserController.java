@@ -35,27 +35,24 @@ public class UserController {
     }
 
     // Update an Existing Book
-    // @PutMapping("/books/{id}")
-    // public Book updateBook(@PathVariable(value = "id") Long bookId, @Valid
-    // @RequestBody Book bookDetails)
-    // throws BookNotFoundException {
-    // Book book = bookRepository.findById(bookId).orElseThrow(() -> new
-    // BookNotFoundException(bookId));
-    // book.setBook_name(bookDetails.getBook_name());
-    // book.setAuthor_name(bookDetails.getAuthor_name());
-    // book.setIsbn(bookDetails.getIsbn());
-    // Book updatedBook = bookRepository.save(book);
-    // return updatedBook;
-    // }
+    @PutMapping("/users/{id}")
+    public User updateUser(@PathVariable(value = "id") Long userId, @Valid @RequestBody User userDetails)
+            throws UserNotFoundException {
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        user.setUsername(userDetails.getUsername());
+        user.setEmail(userDetails.getEmail());
+        // user.setIsbn(userDetails.getIsbn());
+        User updatedUser = userRepository.save(user);
+        return updatedUser;
+    }
 
     // Delete a Book
-    // @DeleteMapping("/books/{id}")
-    // public ResponseEntity<?> deleteBook(@PathVariable(value = "id") Long bookId)
-    // throws BookNotFoundException {
-    // Book book = bookRepository.findById(bookId).orElseThrow(() -> new
-    // BookNotFoundException(bookId));
-    // bookRepository.delete(book);
-    // return ResponseEntity.ok().build();
-    // }
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable(value = "id") Long userId)
+            throws UserNotFoundException {
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        userRepository.delete(user);
+        return ResponseEntity.ok().build();
+    }
 
 }
