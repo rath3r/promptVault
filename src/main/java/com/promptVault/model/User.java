@@ -21,9 +21,11 @@ public class User {
     @NotBlank
     private String email;
 
+    private String password;
+
     // not working
     @ColumnDefault("false")
-    private Boolean enabled;
+    private Boolean enabled = false;
 
     // this should be a roleID with a separate model of roles defined eleswhere
     private String role;
@@ -32,10 +34,11 @@ public class User {
         super();
     }
 
-    public User(Long id, String username, String email, Boolean enabled, String role) {
+    public User(Long id, String username, String email, String password, Boolean enabled, String role) {
         this.id = id;
         this.username = username;
         this.email = email;
+        this.password = password;
         this.enabled = enabled;
         this.role = role;
     }
@@ -54,6 +57,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRole() {

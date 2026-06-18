@@ -4,10 +4,11 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 
-import com.promptVault.PromptRepository;
 import com.promptVault.exception.PromptNotFoundException;
 import com.promptVault.model.Prompt;
+import com.promptVault.repository.PromptRepository;
 
 import java.util.List;
 
@@ -17,9 +18,18 @@ public class PromptController {
     PromptRepository promptRepository;
 
     // Get All Prompts
-    @GetMapping("/prompts")
-    public List<Prompt> getAllPrompts() {
-        return promptRepository.findAll();
+    // @GetMapping("/prompts")
+    // public List<Prompt> getAllPrompts() {
+    // return promptRepository.findAll();
+    // }
+
+    // Get All Books
+    @GetMapping({ "/prompts" })
+    public String getAllPrompts(Model model) {
+        List<Prompt> listPrompts = promptRepository.findAll();
+        model.addAttribute("listPrompts", listPrompts);
+        return "index";
+
     }
 
     // Create a new prompt
