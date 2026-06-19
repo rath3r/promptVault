@@ -2,6 +2,7 @@ package com.promptVault.model;
 
 import org.hibernate.annotations.ColumnDefault;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -11,24 +12,33 @@ import jakarta.validation.constraints.NotBlank;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue
     private Long id;
 
     @NotBlank
+    @Column(unique = true)
     private String username;
 
     @NotBlank
+    @Column(unique = true)
+    @jakarta.validation.constraints.Email
     private String email;
 
     private String password;
 
-    // not working
     @ColumnDefault("false")
     private Boolean enabled = false;
 
-    // this should be a roleID with a separate model of roles defined eleswhere
+    // this could move to a seperate table but not for this iteration
+    // @Enumerated(EnumType.STRING)
     private String role;
+
+    public enum Role {
+        ADMIN,
+        USER
+    }
 
     public User() {
         super();

@@ -1,4 +1,5 @@
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/PromptVaultApplication.java
+/home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/config/PasswordConfig.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/controller/DashboardController.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/controller/HomeController.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/controller/LoginController.java

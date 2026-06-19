@@ -1,8 +1,8 @@
 package com.promptVault.controller;
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
@@ -12,18 +12,15 @@ import com.promptVault.repository.PromptRepository;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class PromptController {
-    @Autowired
-    PromptRepository promptRepository;
 
-    // Get All Prompts
-    // @GetMapping("/prompts")
-    // public List<Prompt> getAllPrompts() {
-    // return promptRepository.findAll();
-    // }
+    private final PromptRepository promptRepository;
 
-    // Get All Books
+    public PromptController(PromptRepository promptRepository) {
+        this.promptRepository = promptRepository;
+    }
+
     @GetMapping({ "/prompts" })
     public String getAllPrompts(Model model) {
         List<Prompt> listPrompts = promptRepository.findAll();

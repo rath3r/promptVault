@@ -1,10 +1,9 @@
 package com.promptVault.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,8 +15,14 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
+
+    public LoginController(UserRepository userRepository,
+            BCryptPasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/login")
     public String showLoginPage(Model model) {
@@ -36,7 +41,7 @@ public class LoginController {
 
         if (user != null
                 && Boolean.TRUE.equals(user.getEnabled())
-                && user.getPassword().equals(password)) {
+                && passwordEncoder.matches(password, user.getPassword())) {
 
             session.setAttribute("loggedInUser", user);
             model.addAttribute("username", user.getUsername());
