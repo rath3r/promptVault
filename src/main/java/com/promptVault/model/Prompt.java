@@ -1,6 +1,6 @@
 package com.promptVault.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,19 +25,28 @@ public class Prompt {
 
     private Boolean shared;
 
-    private Date date;
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
 
     public Prompt() {
         super();
     }
 
-    public Prompt(Long id, String title, String promptText, Long ownerId, Boolean shared, Date date) {
+    public Prompt(
+            Long id,
+            String title,
+            String promptText,
+            Long ownerId,
+            Boolean shared,
+            LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
         this.promptText = promptText;
         this.ownerId = ownerId;
         this.shared = shared;
-        this.date = date;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public String getTitle() {
@@ -80,11 +89,19 @@ public class Prompt {
         this.ownerId = ownerId;
     }
 
-    public Date getDate() {
-        return date;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdateAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

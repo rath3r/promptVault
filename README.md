@@ -55,7 +55,8 @@ User - needs to register. Has username, email, role, account status.
 
 #### Add Users
 
-`curl -d '{"username":"example01","email":"example@example.com"}' -H 'Content-Type:application/json' http://localhost:8080/users`
+Normal users need to be registered.
+Admin users are injected straight into the database.
 
 ### Categories
 
@@ -101,6 +102,7 @@ Users:
 - ID
 - username
 - email
+- password
 - status [enabled/disabled]
 - role [admin/normal]
 
@@ -111,7 +113,8 @@ Prompts:
 - PromptText
 - OwnerID
 - Shared [true/false]
-- Date
+- CreatedAt
+- UpdatedAt
 
 FlaggedPrompts:
 

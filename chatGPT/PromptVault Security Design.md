@@ -4526,3 +4526,69 @@ public class UserController {
 ```
 
 This will also eliminate the IDE warning/suggestion and aligns with current Spring best practices.
+
+Me:
+on the pom.xml my ide is saying:
+The build file has been changed and may need reload to make it effective.
+
+ChatGPT:
+That's normal.
+
+Your IDE has noticed that pom.xml changed and is warning that Maven dependencies may not have been reloaded yet.
+
+In IntelliJ IDEA
+
+You'll usually see one of:
+
+A popup saying "Load Maven Changes"
+A small elephant 🐘 icon in the top-right
+A notification bar saying:
+The build file has been changed and may need reload to make it effective.
+
+Click:
+
+Load Maven Changes
+
+or
+
+Reload All Maven Projects
+Alternatively
+
+Open the Maven tool window and click:
+
+Reload All Maven Projects
+
+(the icon with two circular arrows).
+
+From the command line
+
+You can also verify everything is working with:
+
+./mvnw clean compile
+
+If that succeeds, Maven has correctly resolved all dependencies.
+
+Why the warning appears
+
+You recently:
+
+Changed Spring Boot version
+Removed dependencies
+Added dependencies
+
+The IDE keeps its own dependency index, so it wants to refresh it to match the new pom.xml.
+
+Until you reload, you can sometimes get strange IDE errors such as:
+
+Cannot resolve symbol GetMapping
+Cannot resolve symbol HttpSession
+
+even though the project actually builds fine from the command line.
+
+Since you've just stabilized registration and login, I'd definitely reload the Maven project now. After that, check whether any red underlines remain in:
+
+LoginController
+DashboardController
+UserController
+
+If the code compiles and there are no red imports, you're in a good position to move on to the Prompt functionality.
