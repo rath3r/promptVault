@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/layout :: common-head('Create Flagged Keyword')"></head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">Manage Flagged Keywords</h1>
+
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <h5>Add Flag Keyword</h5>
+
+            <form th:action="@{/admin/flagged-keywords}"
+                  th:object="${flaggedKeyword}"
+                  method="post">
+
+                <div class="input-group">
+
+                    <input type="text"
+                           th:field="*{keyword}"
+                           class="form-control"
+                           placeholder="Flagged Keyword"
+                           required>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Add
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <table class="table table-striped">
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="flaggedKeyword: ${flaggedKeywords}">
+
+            <td th:text="${flaggedKeyword.id}"></td>
+
+            <td th:text="${flaggedKeyword.keyword}"></td>
+
+            <td>
+
+                <form th:action="@{/admin/flagged-keywords/{id}/delete(id=${flaggedKeyword.id})}"
+                      method="post">
+
+                    <button class="btn btn-danger btn-sm">
+                        Delete
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>

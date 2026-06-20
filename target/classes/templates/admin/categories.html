@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/layout :: common-head('Create Prompt')"></head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">Manage Categories</h1>
+
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <h5>Add Category</h5>
+
+            <form th:action="@{/admin/categories}"
+                  th:object="${category}"
+                  method="post">
+
+                <div class="input-group">
+
+                    <input type="text"
+                           th:field="*{name}"
+                           class="form-control"
+                           placeholder="Category name"
+                           required>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Add
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <table class="table table-striped">
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="category : ${categories}">
+
+            <td th:text="${category.id}"></td>
+
+            <td th:text="${category.name}"></td>
+
+            <td>
+
+                <form th:action="@{/admin/categories/{id}/delete(id=${category.id})}"
+                      method="post">
+
+                    <button class="btn btn-danger btn-sm">
+                        Delete
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>

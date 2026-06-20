@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/layout :: common-head('Create Prompt')"></head>
+
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">Manage Users</h1>
+
+    <table class="table table-striped table-hover">
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Enabled</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="user : ${users}">
+
+            <td th:text="${user.id}"></td>
+
+            <td th:text="${user.username}"></td>
+
+            <td th:text="${user.email}"></td>
+
+            <td>
+                <span th:if="${user.enabled}"
+                      class="badge bg-success">
+                    Enabled
+                </span>
+
+                <span th:unless="${user.enabled}"
+                      class="badge bg-danger">
+                    Disabled
+                </span>
+            </td>
+
+            <td th:text="${user.role}"></td>
+
+            <td>
+
+                <form th:if="${user.enabled}"
+                      th:action="@{/admin/users/{id}/disable(id=${user.id})}"
+                      method="post">
+
+                    <button class="btn btn-sm btn-warning">
+                        Disable
+                    </button>
+
+                </form>
+
+                <form th:unless="${user.enabled}"
+                      th:action="@{/admin/users/{id}/enable(id=${user.id})}"
+                      method="post">
+
+                    <button class="btn btn-sm btn-success">
+                        Enable
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>

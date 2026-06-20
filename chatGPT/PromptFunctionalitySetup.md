@@ -708,3 +708,128 @@ Now your UI is in a good place, the next meaningful steps are:
 ---
 
 If you want, next I can help you implement the **Edit Prompt page properly (MVC flow + Thymeleaf prefill + save reuse)** — that’s usually the point where everything “clicks” in Spring Boot CRUD apps.
+
+Me:
+how can I use the same Head tag in every template?
+
+ChatGpt:
+Good question — repeating the same `<head>` in every Thymeleaf template gets messy fast. The clean Spring Boot way is to use **Thymeleaf fragments**.
+
+This lets you define a reusable “layout piece” (like your head, navbar, footer) and include it everywhere.
+
+---
+
+# Option 1 (Recommended): Thymeleaf Fragments
+
+## 1. Create a fragments file
+
+Create:
+
+```text
+src/main/resources/templates/fragments/layout.html
+```
+
+---
+
+## 2. Add a reusable `<head>` fragment
+
+```html id="k2m9fd"
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="common-head(title)">
+    <meta charset="UTF-8" />
+
+    <title th:text="${title}">App</title>
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+</html>
+```
+
+---
+
+## 3. Use it in your pages
+
+In `list.html`:
+
+```html id="n8x2pp"
+<head th:replace="fragments/layout :: common-head('Prompt Dashboard')"></head>
+```
+
+In `form.html`:
+
+```html id="p3wq1a"
+<head th:replace="fragments/layout :: common-head('Create Prompt')"></head>
+```
+
+---
+
+# 4. Even better: full page layout (optional upgrade)
+
+Instead of only sharing the head, you can share full structure:
+
+## layout.html
+
+```html id="l9q2da"
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="head(title)">
+    <meta charset="UTF-8" />
+    <title th:text="${title}">App</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <nav th:fragment="navbar">
+      <div class="bg-dark text-white p-3">Prompt Vault</div>
+    </nav>
+
+    <div th:fragment="content">
+      <!-- page content goes here -->
+    </div>
+  </body>
+</html>
+```
+
+Then each page becomes more structured.
+
+---
+
+# 5. Simple mental model
+
+Think of fragments like:
+
+- 🧩 reusable HTML blocks
+- 🧱 building components (like React, but server-side)
+- 📦 shared layout pieces
+
+---
+
+# 6. Best practice for your project
+
+For your current stage, do this:
+
+✔ Use `head fragment` (yes)
+✔ Add navbar later
+✔ Full layout system only when app grows
+
+---
+
+# If you want next step (high impact)
+
+I can show you how to turn your app into a **proper layout system like this:**
+
+- Navbar stays fixed
+- Content changes per page
+- No repeated HTML anywhere
+- Cleaner than most beginner Spring Boot apps
+
+Just say 👍

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/layout :: common-head('Create Prompt')"></head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">
+        Admin Dashboard
+    </h1>
+
+    <p>
+        Welcome,
+        <strong th:text="${user.username}"></strong>
+    </p>
+
+    <div class="row g-4 mt-3">
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Users</h5>
+                    <p class="card-text">
+                        View and manage registered users.
+                    </p>
+                    <a th:href="@{/admin/users}"
+                       class="btn btn-primary">
+                        Manage Users
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Prompts</h5>
+                    <p class="card-text">
+                        View all prompts in the system.
+                    </p>
+                    <a th:href="@{/admin/prompts}"
+                       class="btn btn-primary">
+                        View Prompts
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Flagged Prompts</h5>
+                    <p class="card-text">
+                        Review prompts requiring moderation.
+                    </p>
+                    <a th:href="@{/admin/prompts/flagged}"
+                       class="btn btn-warning">
+                        Review Flags
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Categories</h5>
+                    <p class="card-text">
+                        Create and manage prompt categories.
+                    </p>
+                    <a th:href="@{/admin/categories}"
+                       class="btn btn-success">
+                        Manage Categories
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Flagged Keywords</h5>
+                    <p class="card-text">
+                        Create and manage prompt Flagged Keywords.
+                    </p>
+                    <a th:href="@{/admin/flagged-keywords}"
+                       class="btn btn-success">
+                        Manage Flagged Keywords
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

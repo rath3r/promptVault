@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/layout :: common-head('Create Prompt')"></head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">All Prompts</h1>
+
+    <table class="table table-striped">
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Owner</th>
+            <th>Category</th>
+            <th>Flagged</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="prompt : ${prompts}">
+
+            <td th:text="${prompt.id}"></td>
+
+            <td th:text="${prompt.title}"></td>
+
+            <td th:text="${prompt.owner.username}"></td>
+
+            <td>
+                <span th:if="${prompt.category != null}"
+                      th:text="${prompt.category.name}">
+                </span>
+
+                <span th:unless="${prompt.category != null}">
+                    Uncategorised
+                </span>
+            </td>
+
+            <td>
+                <span th:if="${prompt.flagged}"
+                      class="badge bg-danger">
+                    Flagged
+                </span>
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>

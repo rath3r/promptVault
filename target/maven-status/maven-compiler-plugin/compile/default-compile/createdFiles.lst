@@ -9,6 +9,5 @@ com/promptVault/exception/PromptNotFoundException.class
 com/promptVault/PromptVaultApplication.class
 com/promptVault/controller/UserController.class
 com/promptVault/config/PasswordConfig.class
-com/promptVault/controller/LoginController.class
 com/promptVault/controller/DashboardController.class
 com/promptVault/model/User$Role.class

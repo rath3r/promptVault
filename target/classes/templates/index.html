@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Home Page</title>
-</head>
-<body>
-
-    <h1 th:text="${message}">Default Message</h1>
-
+<head th:replace="fragments/layout :: common-head('Home')"></head>
+<body class="bg-light">
+<nav th:replace="~{fragments/navbar :: navbar}"></nav>
+<div class="container mt-4">
+    <div class="align-items-center mb-3">
+        <p>Welcome to PromptVault. Your location to store and review prompts.</p>
+        <p>Please visit your <a th:href="@{/dashboard}">dashboard</a> to get started.</p>
+    </div>
+</div>
 </body>
 </html>

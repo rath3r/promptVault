@@ -1,5 +1,7 @@
 package com.promptVault.controller;
 
+import java.util.Optional;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +39,9 @@ public class LoginController {
             Model model,
             HttpSession session) {
 
-        User user = userRepository.findByUsername(username);
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+
+        User user = optionalUser.get();
 
         if (user != null
                 && Boolean.TRUE.equals(user.getEnabled())
@@ -50,5 +54,13 @@ public class LoginController {
         }
 
         return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+
+        session.invalidate();
+
+        return "redirect:/login";
     }
 }

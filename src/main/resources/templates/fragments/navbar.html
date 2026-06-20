@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+
+        <a class="navbar-brand" th:href="@{/}">
+            PromptVault
+        </a>
+
+        <div class="navbar-nav ms-auto">
+
+            <span th:if="${session.loggedInUser != null}"
+                  class="navbar-text me-3">
+                Welcome,
+                <strong th:text="${session.loggedInUser.username}"></strong>
+            </span>
+
+            <a th:if="${session.loggedInUser != null and session.loggedInUser.role == 'ADMIN'}"
+                th:href="@{/admin}"
+                class="nav-link">
+                Admin
+            </a>
+            
+            <a th:if="${session.loggedInUser == null}"
+               th:href="@{/login}"
+               class="nav-link">
+                Login
+            </a>
+
+            <a th:if="${session.loggedInUser != null}"
+               th:href="@{/logout}"
+               class="nav-link">
+                Logout
+            </a>
+
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>

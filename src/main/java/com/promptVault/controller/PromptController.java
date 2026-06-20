@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import com.promptVault.exception.PromptNotFoundException;
 import com.promptVault.model.Prompt;
 import com.promptVault.repository.PromptRepository;
+import com.promptVault.service.PromptModerationService;
 import com.promptVault.service.PromptService;
 
 import java.util.List;
@@ -18,10 +19,13 @@ public class PromptController {
 
     private final PromptRepository promptRepository;
     private final PromptService promptService;
+    private final PromptModerationService moderationService;
 
-    public PromptController(PromptRepository promptRepository, PromptService promptService) {
+    public PromptController(PromptRepository promptRepository, PromptService promptService,
+            PromptModerationService moderationService) {
         this.promptRepository = promptRepository;
         this.promptService = promptService;
+        this.moderationService = moderationService;
     }
 
     // @GetMapping({ "/prompts" })
@@ -40,6 +44,12 @@ public class PromptController {
 
     @PostMapping("/prompts/save")
     public String savePrompt(@ModelAttribute Prompt prompt) {
+
+        boolean flagged = moderationService.containsFlaggedKeywords(
+                prompt.getPromptText());
+
+        prompt.setFlagged(flagged);
+
         promptService.savePrompt(prompt);
         return "redirect:/dashboard";
     }
