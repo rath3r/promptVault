@@ -21,6 +21,8 @@
                         <th>ID</th>
                         <th>Title</th>
                         <th>Content</th>
+                        <th>Category</th>
+                        <th>Shared</th>
                         <th style="width: 180px;">Actions</th>
                     </tr>
                 </thead>
@@ -29,9 +31,18 @@
                         <td th:text="${prompt.id}"></td>
                         <td th:text="${prompt.title}"></td>
                         <td th:text="${prompt.promptText}"></td>
+                        <td th:text="${prompt.category != null ? prompt.category.name : 'Uncategorized'}"></td>
+                        <td th:text="${prompt.shared}"></td>
                         <td>
                             <a class="btn btn-sm btn-warning" th:href="@{'/prompts/edit/' + ${prompt.id}}">Edit</a>
                             <a class="btn btn-sm btn-danger" th:href="@{'/prompts/delete/' + ${prompt.id}}" onclick="return confirm('Delete this prompt?')">Delete</a>
+                            <form th:action="@{/prompts/{id}/submit(id=${prompt.id})}"
+                                method="post">
+                                <button type="submit"
+                                        class="btn btn-success btn-sm">
+                                    Submit to AI
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>

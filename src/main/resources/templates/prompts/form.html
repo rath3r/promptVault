@@ -23,6 +23,31 @@
                     <textarea class="form-control" rows="6" th:field="*{promptText}"></textarea>
                 </div>
 
+                <div class="mb-3">
+                    <label class="form-label">Category:</label>
+                    <select name="categoryId"
+                            class="form-select">
+
+                        <option
+                            th:each="category : ${categories}"
+                            th:value="${category.id}"
+                            th:text="${category.name}">
+                        </option>
+
+                    </select>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input
+                        type="checkbox"
+                        class="form-check-input"
+                        id="shared"
+                        th:field="*{shared}">
+                    <label class="form-check-label" for="shared">
+                        Shared
+                    </label>
+                </div>
+
                 <button class="btn btn-success" type="submit">
                     Save
                 </button>

@@ -1,5 +1,7 @@
 package com.promptVault.model;
 
+import java.time.LocalDateTime;
+
 import org.hibernate.annotations.ColumnDefault;
 
 import jakarta.persistence.Column;
@@ -21,6 +23,10 @@ public class User {
     @Column(unique = true)
     private String username;
 
+    private String firstname;
+
+    private String surname;
+
     @NotBlank
     @Column(unique = true)
     @jakarta.validation.constraints.Email
@@ -35,6 +41,10 @@ public class User {
     // @Enumerated(EnumType.STRING)
     private String role;
 
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+
     public enum Role {
         ADMIN,
         USER
@@ -44,13 +54,18 @@ public class User {
         super();
     }
 
-    public User(Long id, String username, String email, String password, Boolean enabled, String role) {
+    public User(Long id, String username, String firstname, String surname, String email, String password,
+            Boolean enabled, String role, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.username = username;
+        this.firstname = firstname;
+        this.surname = surname;
         this.email = email;
         this.password = password;
         this.enabled = enabled;
         this.role = role;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public String getUsername() {
@@ -59,6 +74,22 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String surname) {
+        this.firstname = surname;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getEmail() {
@@ -99,5 +130,21 @@ public class User {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdateAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

@@ -1,5 +1,7 @@
 package com.promptVault.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +35,7 @@ public class UserController {
 
         user.setEnabled(true);
         user.setRole("USER");
-
+        user.setCreatedAt(LocalDateTime.now());
         user.setPassword(
                 passwordEncoder.encode(user.getPassword()));
 

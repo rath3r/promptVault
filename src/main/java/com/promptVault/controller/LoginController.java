@@ -41,6 +41,11 @@ public class LoginController {
 
         Optional<User> optionalUser = userRepository.findByUsername(username);
 
+        if (optionalUser.isEmpty()) {
+            model.addAttribute("error", "Invalid username or password");
+            return "login";
+        }
+
         User user = optionalUser.get();
 
         if (user != null

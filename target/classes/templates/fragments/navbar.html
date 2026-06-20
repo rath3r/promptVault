@@ -17,6 +17,11 @@
                 <strong th:text="${session.loggedInUser.username}"></strong>
             </span>
 
+            <a class="nav-link"
+                th:href="@{/shared-prompts}">
+                Shared Prompts
+            </a>
+
             <a th:if="${session.loggedInUser != null and session.loggedInUser.role == 'ADMIN'}"
                 th:href="@{/admin}"
                 class="nav-link">

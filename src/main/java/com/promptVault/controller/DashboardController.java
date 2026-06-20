@@ -28,7 +28,7 @@ public class DashboardController {
         }
 
         model.addAttribute("username", user.getUsername());
-        model.addAttribute("prompts", promptService.getAllPrompts());
+        model.addAttribute("prompts", promptService.findAllByUser(user));
 
         return "dashboard";
     }

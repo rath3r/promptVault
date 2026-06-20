@@ -1,6 +1,7 @@
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/PromptVaultApplication.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/config/DataInitializer.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/config/PasswordConfig.java
+/home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/controller/AdminController.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/controller/DashboardController.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/controller/HomeController.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/controller/LoginController.java
@@ -8,8 +9,16 @@
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/controller/UserController.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/exception/PromptNotFoundException.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/exception/UserNotFoundException.java
+/home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/model/Category.java
+/home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/model/FlaggedKeyword.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/model/Prompt.java
+/home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/model/PromptSubmission.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/model/User.java
+/home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/repository/CategoryRepository.java
+/home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/repository/FlaggedKeywordRepository.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/repository/PromptRepository.java
+/home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/repository/PromptSubmissionRepository.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/repository/UserRepository.java
+/home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/service/PromptModerationService.java
 /home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/service/PromptService.java
+/home/thomas/Documents/college/SecureSoftware/assignment/src/main/java/com/promptVault/service/SimulatedAiService.java

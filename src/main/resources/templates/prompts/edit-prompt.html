@@ -7,9 +7,11 @@
 
     <div class="card shadow-sm">
         <div class="card-body">
-            <h2 class="mb-4">Create Prompt</h2>
+            <h2 class="mb-4">Edit Prompt</h2>
 
-            <form th:action="@{/prompts/save}" th:object="${prompt}" method="post">
+            <form th:action="@{/prompts/update/{id}(id=${prompt.id})}"
+                th:object="${prompt}"
+                method="post">
 
                 <input type="hidden" th:field="*{id}" />
 
@@ -25,8 +27,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Category:</label>
-                    <select name="categoryId"
-                            class="form-select">
+                    <select class="form-select" th:field="*{category.id}">
 
                         <option
                             th:each="category : ${categories}"

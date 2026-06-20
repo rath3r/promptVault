@@ -60,7 +60,7 @@ Admin users are injected straight into the database.
 
 ### Categories
 
-Use to categorise flagged prompts.
+Use to categorise all prompts.
 
 Admin can add, edit and delete prompt categories. Categories have name and description.
 
@@ -101,18 +101,25 @@ Users:
 
 - ID
 - username
+- firstname
+- surname
 - email
 - password
 - status [enabled/disabled]
 - role [admin/normal]
+- createdAt
+- updatedAt
 
 Prompts:
 
 - ID
 - Title
 - PromptText
-- OwnerID
+- PromptResponse - defaulted to simulated response
+- Owner - reference to User entity
 - Shared [true/false]
+- Category - reference to Category entity is added
+- Flagged
 - CreatedAt
 - UpdatedAt
 
