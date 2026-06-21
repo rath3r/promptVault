@@ -1,5 +1,6 @@
 package com.promptVault.controller;
 
+import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -171,6 +172,50 @@ public class AdminController {
         return "redirect:/admin/categories";
     }
 
+    @GetMapping("/admin/categories/{id}/edit")
+    public String editCategory(
+            @PathVariable Long id,
+            HttpSession session,
+            Model model) {
+
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null ||
+                !"ADMIN".equals(user.getRole())) {
+            return "redirect:/login";
+        }
+
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        model.addAttribute("category", category);
+
+        return "admin/edit-category";
+    }
+
+    @PostMapping("/admin/categories/{id}/edit")
+    public String updateCategory(
+            @PathVariable Long id,
+            @ModelAttribute Category updatedCategory,
+            HttpSession session) {
+
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null ||
+                !"ADMIN".equals(user.getRole())) {
+            return "redirect:/login";
+        }
+
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        category.setName(updatedCategory.getName());
+
+        categoryRepository.save(category);
+
+        return "redirect:/admin/categories";
+    }
+
     @GetMapping("/admin/prompts")
     public String allPrompts(
             HttpSession session,
@@ -293,4 +338,49 @@ public class AdminController {
 
         return "redirect:/admin/flagged-keywords";
     }
+
+    @GetMapping("/admin/keywords/{id}/edit")
+    public String editKeyword(
+            @PathVariable Long id,
+            HttpSession session,
+            Model model) {
+
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null ||
+                !"ADMIN".equals(user.getRole())) {
+            return "redirect:/login";
+        }
+
+        FlaggedKeyword keyword = flaggedKeywordRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Keyword not found"));
+
+        model.addAttribute("keyword", keyword);
+
+        return "admin/edit-keyword";
+    }
+
+    @PostMapping("/admin/keywords/{id}/edit")
+    public String updateKeyword(
+            @PathVariable Long id,
+            @ModelAttribute FlaggedKeyword updatedKeyword,
+            HttpSession session) {
+
+        User user = (User) session.getAttribute("loggedInUser");
+
+        if (user == null ||
+                !"ADMIN".equals(user.getRole())) {
+            return "redirect:/login";
+        }
+
+        FlaggedKeyword keyword = flaggedKeywordRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Keyword not found"));
+
+        keyword.setKeyword(updatedKeyword.getKeyword());
+
+        flaggedKeywordRepository.save(keyword);
+
+        return "redirect:/admin/flagged-keywords";
+    }
+
 }

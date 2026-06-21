@@ -34,16 +34,15 @@
                         <td th:text="${prompt.category != null ? prompt.category.name : 'Uncategorized'}"></td>
                         <td th:text="${prompt.shared}"></td>
                         <td>
-                                <div class="d-flex gap-2">
-
-                            <a class="btn btn-sm btn-warning" th:href="@{'/prompts/edit/' + ${prompt.id}}">Edit</a>
-                            <a class="btn btn-sm btn-danger" th:href="@{'/prompts/delete/' + ${prompt.id}}" onclick="return confirm('Delete this prompt?')">Delete</a>
-                            <form th:action="@{/prompts/{id}/submit(id=${prompt.id})}"
-                                method="post" class="m-0">
-                                <button type="submit" class="btn btn-success btn-sm">
-                                    Submit to AI
-                                </button>
-                            </form>
+                            <div class="d-flex gap-2">
+                                <a class="btn btn-sm btn-warning" th:href="@{'/prompts/edit/' + ${prompt.id}}">Edit</a>
+                                <a class="btn btn-sm btn-danger" th:href="@{'/prompts/delete/' + ${prompt.id}}" onclick="return confirm('Delete this prompt?')">Delete</a>
+                                <form th:action="@{/prompts/{id}/submit(id=${prompt.id})}"
+                                    method="post" class="m-0">
+                                    <button type="submit" class="btn btn-success btn-sm">
+                                        Submit to AI
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>

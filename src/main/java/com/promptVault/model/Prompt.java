@@ -139,7 +139,7 @@ public class Prompt {
         this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdateAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 

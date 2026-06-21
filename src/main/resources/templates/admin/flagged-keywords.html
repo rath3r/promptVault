@@ -58,7 +58,7 @@
             <td th:text="${flaggedKeyword.keyword}"></td>
 
             <td>
-
+            <div class="d-flex gap-2">
                 <form th:action="@{/admin/flagged-keywords/{id}/delete(id=${flaggedKeyword.id})}"
                       method="post">
 
@@ -68,6 +68,11 @@
 
                 </form>
 
+                <a th:href="@{/admin/keywords/{id}/edit(id=${flaggedKeyword.id})}"
+                class="btn btn-warning btn-sm">
+                    Edit
+                </a>
+            </div>
             </td>
 
         </tr>

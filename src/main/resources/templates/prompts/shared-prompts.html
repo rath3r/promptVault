@@ -11,6 +11,7 @@
         <thead class="table-dark">
             <tr>
                 <th>ID</th>
+                <th>User</th>
                 <th>Title</th>
                 <th>Content</th>
                 <th>Category</th>
@@ -20,6 +21,7 @@
         <tbody>
             <tr th:each="prompt : ${prompts}">
                 <td th:text="${prompt.id}"></td>
+                <td th:text="${prompt.owner.username}"></td>
                 <td th:text="${prompt.title}"></td>
                 <td th:text="${prompt.promptText}"></td>
                 <td th:text="${prompt.category != null ? prompt.category.name : 'Uncategorized'}"></td>

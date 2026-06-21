@@ -1,6 +1,9 @@
 # Prompt Vault
 
 This is the code for an assignment for the Secure Computing module in the Cybersecurity MSC in UCD.
+The assignment spec asked to not consider security but I couldn't bring myself to store passwords
+in plain text so have hashed the passwords. There are a couple of checks on the status of logged
+in users also.
 
 ## Usage
 
@@ -10,6 +13,49 @@ To run the app use `./mvnw spring-boot:run`
 
 ## Database
 
+The database can be imported from an SQL dump or the application will build the tables on the fly.
+
+Database credentials need to be added to `theapplication.properties`. Currenlty they read:
+
+```
+## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+spring.datasource.url = jdbc:mysql://localhost:3306/promptVault
+spring.datasource.username = website
+spring.datasource.password = password
+```
+
+Change to your db username and password. Instructions for creating username and password are found
+below.
+
+### Import example DB
+
+There is a small example database with an admin user, two normal users, some prompts, some flagged
+keywords and categories in a MySQL dump
+
+#### Database Setup
+
+Create the database:
+
+```bash
+sudo mysql -e "CREATE DATABASE promptvault;"
+```
+
+Import the database dump which is located in `database/promptVault.sql`:
+
+```bash
+sudo mysql promptvault < promptvault.sql
+```
+
+Update `application.properties` with your MySQL configuration.
+
+Run the application:
+
+```bash
+./mvn spring-boot:run
+```
+
+### Create DB from scratch
+
 Create promptVault database;
 
 ```
@@ -18,6 +64,13 @@ USE promptVault;
 CREATE USER 'website'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON promptVault.* TO 'website'@'localhost';
 ```
+
+The application will build the DB while you use it.
+
+Make sure to change the spring.jpa.hibernate.ddl-auto value to `create` in
+`src/main/resources/application.properties`
+
+And change back to `update` afterwards to prevent readding all the data after every restart.
 
 ## Requirements
 
@@ -35,7 +88,15 @@ Users should be able to login and logout.
 
 #### Admins
 
-Do not need to register.
+Do not need to register. There is a predefined Admin user that can be used straight away.
+
+Username: admin
+password: admin
+
+Using `admin` as a password is flagged by Chrome but this can be ignored.
+
+When logged in as the Admin there is an Admin Dashboard link in the navbar which handles all admin
+tasks.
 
 - Can view the list of registered Users.
 - Can enable and disable regular users.
@@ -47,6 +108,14 @@ Do not need to register.
 #### Normal Users
 
 User - needs to register. Has username, email, role, account status.
+
+If using the DB dump there are two users ready to be used.
+
+Username: example01
+password: asdf
+
+Username: example02
+password: asdf
 
 - Can see their prompts
 - Can see shared prompts
@@ -115,28 +184,28 @@ Prompts:
 - ID
 - Title
 - PromptText
-- PromptResponse - defaulted to simulated response
 - Owner - reference to User entity
 - Shared [true/false]
 - Category - reference to Category entity is added
 - Flagged
+- FlaggedKeyword
 - CreatedAt
 - UpdatedAt
 
-FlaggedPrompts:
+PromptSubmission:
 
 - ID
-- PromptID
-- FlaggedKeywordID
-- CategoryID
+- Prompt
+- User
+- submittedAt
+- responseText
 
 FlaggedKeywords:
 
 - ID
-- Title
 - Keyword
 
 Categories:
 
 - ID
-- Category
+- Name

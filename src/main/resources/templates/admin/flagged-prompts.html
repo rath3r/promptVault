@@ -8,7 +8,7 @@
 
 <div class="container mt-5">
 
-    <h1 class="mb-4">All Prompts</h1>
+    <h1 class="mb-4">Flagged Prompt Submissions</h1>
 
     <table class="table table-striped">
 
@@ -18,6 +18,8 @@
             <th>Title</th>
             <th>Owner</th>
             <th>Category</th>
+            <th>Flagged Keyword</th>
+            <th>Submission Date</th>
             <th>Flagged</th>
         </tr>
         </thead>
@@ -41,6 +43,10 @@
                     Uncategorised
                 </span>
             </td>
+
+            <td th:text="${prompt.flaggedKeyword}"></td>
+
+            <td th:text="${prompt.updatedAt}"></td>
 
             <td>
                 <span th:if="${prompt.flagged}"

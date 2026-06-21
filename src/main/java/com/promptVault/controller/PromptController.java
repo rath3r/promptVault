@@ -184,6 +184,7 @@ public class PromptController {
 
                 flagged = true;
                 prompt.setFlaggedKeyword(keyword.getKeyword());
+                prompt.setUpdatedAt(LocalDateTime.now());
                 break;
             }
         }

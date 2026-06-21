@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/layout :: common-head('Edit Category')"></head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container mt-5">
+
+    <h2>Edit Flagged Keyword</h2>
+
+
+	<form th:action="@{/admin/keywords/{id}/edit(id=${keyword.id})}"
+	th:object="${keyword}"
+	method="post">
+
+	<input type="text"
+	th:field="*{keyword}"
+	required />
+
+	<button type="submit">Save</button>
+
+	</form>
+	<a th:href="@{/admin/keywords}">Back</a>
+	</form>
+
+	<a th:href="@{/admin/categories}">Back</a>
+
+</div>
+
+</body>
+</html>
