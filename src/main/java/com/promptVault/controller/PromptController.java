@@ -11,10 +11,12 @@ import org.springframework.ui.Model;
 
 import com.promptVault.exception.PromptNotFoundException;
 import com.promptVault.model.Category;
+import com.promptVault.model.FlaggedKeyword;
 import com.promptVault.model.Prompt;
 import com.promptVault.model.PromptSubmission;
 import com.promptVault.model.User;
 import com.promptVault.repository.CategoryRepository;
+import com.promptVault.repository.FlaggedKeywordRepository;
 import com.promptVault.repository.PromptRepository;
 import com.promptVault.repository.PromptSubmissionRepository;
 import com.promptVault.repository.UserRepository;
@@ -35,11 +37,12 @@ public class PromptController {
     private final UserRepository userRepository;
     private final SimulatedAiService simulatedAiService;
     private final PromptSubmissionRepository promptSubmissionRepository;
+    private final FlaggedKeywordRepository flaggedKeywordRepository;
 
     public PromptController(PromptRepository promptRepository, PromptService promptService,
             PromptModerationService moderationService, CategoryRepository categoryRepository,
             UserRepository userRepository, SimulatedAiService simulatedAiService,
-            PromptSubmissionRepository promptSubmissionRepository) {
+            PromptSubmissionRepository promptSubmissionRepository, FlaggedKeywordRepository flaggedKeywordRepository) {
         this.promptRepository = promptRepository;
         this.promptService = promptService;
         this.moderationService = moderationService;
@@ -47,6 +50,7 @@ public class PromptController {
         this.userRepository = userRepository;
         this.simulatedAiService = simulatedAiService;
         this.promptSubmissionRepository = promptSubmissionRepository;
+        this.flaggedKeywordRepository = flaggedKeywordRepository;
     }
 
     // @GetMapping({ "/prompts" })
@@ -168,6 +172,25 @@ public class PromptController {
 
         Prompt prompt = promptService.findByIdAndUser(id, user);
 
+        boolean flagged = false;
+
+        String content = prompt.getPromptText().toLowerCase();
+
+        List<FlaggedKeyword> keywords = flaggedKeywordRepository.findAll();
+        for (FlaggedKeyword keyword : keywords) {
+
+            if (content.contains(
+                    keyword.getKeyword().toLowerCase())) {
+
+                flagged = true;
+                prompt.setFlaggedKeyword(keyword.getKeyword());
+                break;
+            }
+        }
+
+        prompt.setFlagged(flagged);
+        promptService.savePrompt(prompt);
+
         String response = simulatedAiService.generateResponse(
                 prompt.getPromptText());
 
@@ -181,6 +204,12 @@ public class PromptController {
 
         model.addAttribute("prompt", prompt);
         model.addAttribute("response", response);
+
+        if (flagged) {
+            model.addAttribute(
+                    "warning",
+                    "Warning: This prompt may contain sensitive information.");
+        }
 
         return "prompts/ai-response";
     }

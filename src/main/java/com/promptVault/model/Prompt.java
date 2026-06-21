@@ -35,6 +35,8 @@ public class Prompt {
 
     private Boolean flagged = false;
 
+    private String flaggedKeyword;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
@@ -51,6 +53,7 @@ public class Prompt {
             Boolean shared,
             Category category,
             Boolean flagged,
+            String flaggedKeyword,
             LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
@@ -59,6 +62,7 @@ public class Prompt {
         this.shared = shared;
         this.category = category;
         this.flagged = flagged;
+        this.flaggedKeyword = flaggedKeyword;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -117,6 +121,14 @@ public class Prompt {
 
     public void setFlagged(Boolean flagged) {
         this.flagged = flagged;
+    }
+
+    public String getFlaggedKeyword() {
+        return flaggedKeyword;
+    }
+
+    public void setFlaggedKeyword(String flaggedKeyword) {
+        this.flaggedKeyword = flaggedKeyword;
     }
 
     public LocalDateTime getCreatedAt() {

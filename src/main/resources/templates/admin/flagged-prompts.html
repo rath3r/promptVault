@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head('Prompts')}"></head>
-
+<head th:replace="fragments/layout :: common-head('Create Flagged Keyword')"></head>
 <body>
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -34,25 +33,13 @@
             <td th:text="${prompt.owner.username}"></td>
 
             <td>
-                <form th:action="@{/admin/prompts/{id}/category(id=${prompt.id})}"
-                    method="post">
+                <span th:if="${prompt.category != null}"
+                      th:text="${prompt.category.name}">
+                </span>
 
-                    <select name="categoryId"
-                            class="form-select">
-
-                        <option
-                            th:each="category : ${categories}"
-                            th:value="${category.id}"
-                            th:text="${category.name}">
-                        </option>
-
-                    </select>
-
-                    <button class="btn btn-primary mt-2">
-                        Assign Category
-                    </button>
-
-                </form>
+                <span th:unless="${prompt.category != null}">
+                    Uncategorised
+                </span>
             </td>
 
             <td>

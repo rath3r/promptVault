@@ -4,7 +4,9 @@
 <body class="bg-light">
 <nav th:replace="~{fragments/navbar :: navbar}"></nav>
 <div class="container mt-4">
-
+    <div th:if="${warning}" class="alert alert-warning">
+        <span th:text="${warning}"></span>
+    </div>
     <div class="card shadow-sm">
         <div class="card-body">
             <h2 th:text="${prompt.title}"></h2>
@@ -20,12 +22,9 @@
                 Back
             </a>
 
-            
         </div>
     </div>
 
-
 </div>
-
 </body>
 </html>

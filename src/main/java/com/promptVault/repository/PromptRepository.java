@@ -14,7 +14,7 @@ public interface PromptRepository extends JpaRepository<Prompt, Long> {
 
     List<Prompt> findBySharedTrue();
 
-    List<Prompt> findByIdAndUser(Long id, User user);
+    // List<Prompt> findByIdAndUser(Long id, User owner);
 
     Optional<Prompt> findByIdAndOwner(Long id, User owner);
 }

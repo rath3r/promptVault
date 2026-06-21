@@ -7,7 +7,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h3">Prompt Dashboard</h1>
-
+        <p>View your <a th:href="@{'/history'}">prompt subission history here</a>.</p>
         <a class="btn btn-primary" href="/prompts/new">
             + New Prompt
         </a>
@@ -23,7 +23,7 @@
                         <th>Content</th>
                         <th>Category</th>
                         <th>Shared</th>
-                        <th style="width: 180px;">Actions</th>
+                        <th style="width: 270px;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,15 +34,17 @@
                         <td th:text="${prompt.category != null ? prompt.category.name : 'Uncategorized'}"></td>
                         <td th:text="${prompt.shared}"></td>
                         <td>
+                                <div class="d-flex gap-2">
+
                             <a class="btn btn-sm btn-warning" th:href="@{'/prompts/edit/' + ${prompt.id}}">Edit</a>
                             <a class="btn btn-sm btn-danger" th:href="@{'/prompts/delete/' + ${prompt.id}}" onclick="return confirm('Delete this prompt?')">Delete</a>
                             <form th:action="@{/prompts/{id}/submit(id=${prompt.id})}"
-                                method="post">
-                                <button type="submit"
-                                        class="btn btn-success btn-sm">
+                                method="post" class="m-0">
+                                <button type="submit" class="btn btn-success btn-sm">
                                     Submit to AI
                                 </button>
                             </form>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
