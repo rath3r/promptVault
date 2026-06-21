@@ -5,6 +5,17 @@ The assignment spec asked to not consider security but I couldn't bring myself t
 in plain text so have hashed the passwords. There are a couple of checks on the status of logged
 in users also.
 
+## ChatGPT
+
+For this assignment we were encouraged to use ChatGPT which I intially did not overly rely on
+hoping to use my professional experience as a developer to do most of the work myself. I built the
+start of the project based on the tutorials from the course but qucikly realised that my knowledge
+of java and spring was not sufficient to complete the task. I therefore switched to asking CHatGPT
+for help. All of the conversations I has with chatGPT are recorded in the `/chatGPT` directory.
+This was my first time doing extensive development work with an LLM and the process was good. It
+was tiring at times as it never gives up but I think it helped me finish the application in a way
+that satisfies the requirements of the assignment.
+
 ## Usage
 
 The Spring Boot app was initialised using https://start.spring.io/
